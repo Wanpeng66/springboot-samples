@@ -13,12 +13,16 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/5/23 17:27
  */
 @Service
-@CacheConfig
+@CacheConfig(cacheNames = {"defaultCache","hotCache"})
 public class CacheService {
 
-    @Cacheable(cacheNames = {"defaultCache","hotCache"},key = "#cacheService.#methodName")
-    public String getCache() throws InterruptedException {
-        TimeUnit.SECONDS.sleep( 3 );
+    @Cacheable(key = "#cacheService.#methodName")
+    public String getCache() {
+        try {
+            TimeUnit.SECONDS.sleep( 3 );
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "this is hot-cache-value";
     }
 }
