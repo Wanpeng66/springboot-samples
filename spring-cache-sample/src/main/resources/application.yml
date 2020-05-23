@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-cache-sample
+  cache:
+    type: redis
+    redis:
+      key-prefix: spring-cache
+      time-to-live: 30m
+server:
+  port: 9090
+  servlet:
+    context-path: /spring-cache
