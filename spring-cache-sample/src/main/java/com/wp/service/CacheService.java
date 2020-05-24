@@ -13,10 +13,10 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/5/23 17:27
  */
 @Service
-@CacheConfig(cacheNames = {"defaultCache","hotCache"})
+@CacheConfig(cacheNames = {"defaultCache","hotCache"},keyGenerator = "customKeyGenerator")
 public class CacheService {
 
-    @Cacheable(key = "#cacheService.#methodName")
+    @Cacheable
     public String getCache() {
         try {
             TimeUnit.SECONDS.sleep( 3 );

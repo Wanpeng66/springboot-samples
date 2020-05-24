@@ -2,6 +2,7 @@ package com.wp.config;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -14,11 +15,9 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author: wp
@@ -67,7 +66,7 @@ public class SpringCacheConfig {
         cacheNames.add( "hotCache" );
 
         // 对每个缓存空间应用不同的配置
-        Map<String, RedisCacheConfiguration> configMap = new HashMap<>();
+        Map<String, RedisCacheConfiguration> configMap = new HashMap<>(2);
         configMap.put("hotCache", defaultCacheConfig.entryTtl(Duration.ofSeconds(60)));
 
         RedisCacheManager cacheManager = RedisCacheManager.builder(redisConnectionFactory)
@@ -76,5 +75,15 @@ public class SpringCacheConfig {
                 .withInitialCacheConfigurations(configMap)
                 .build();
         return cacheManager;
+    }
+
+    @Bean("customKeyGenerator")
+    public KeyGenerator customKeyGenerator(){
+        return  new KeyGenerator(){
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                return target.getClass()+"."+method.getName()+"(params:"+ Arrays.asList(params).toString() +")";
+            }
+        };
     }
 }

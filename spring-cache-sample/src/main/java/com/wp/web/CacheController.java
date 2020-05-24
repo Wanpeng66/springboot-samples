@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class CacheController {
+
     @Autowired
     CacheService cacheService;
 
     @GetMapping("/getCache")
-
     public String getHotCache(){
         return cacheService.getCache();
     }
