@@ -1,6 +1,4 @@
-#################################### common config : ####################################
 spring.application.name: spring-data-monogo-sample
-# \u5E94\u7528\u670D\u52A1web\u8BBF\u95EE\u7AEF\u53E3
 server.port: 10002
 
 spring:
@@ -8,3 +6,4 @@ spring:
     mongodb:
       host: 127.0.0.1
       port: 27017
+      database: articleDB
