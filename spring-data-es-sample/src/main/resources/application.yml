@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-data-es-sample
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints:
+            - http://localhost:9200
