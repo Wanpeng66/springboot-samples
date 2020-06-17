@@ -46,8 +46,8 @@ class SpringDataEsSampleApplicationTests {
 
     @Test
     void crud(){
-        //ESPO po = new ESPO( UUID.randomUUID().toString(),"wp",25 );
-        //ESPO save = restTemplate.save( po );
+        ESPO po = new ESPO( UUID.randomUUID().toString(),"wpp",25 );
+        ESPO save = restTemplate.save( po );
 
 
         SearchHits<ESPO> hits = restTemplate.search( Query.findAll(), ESPO.class );
