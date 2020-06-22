@@ -21,6 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
+
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder().title( "springboot整合swagger2" ).description( "api在线文档" ).version( "1.0" ).build();
     }
