@@ -2,6 +2,7 @@ package com.wp.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -11,7 +12,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.print.Doc;
 
 /**
  * @author: wp
@@ -19,7 +19,7 @@ import javax.print.Doc;
  * @Description: TODO
  * @date 2020/6/22 15:31
  */
-@Configurable
+@Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
@@ -30,7 +30,7 @@ public class SwaggerConfig {
     @Bean
     public Docket docket(){
         return new Docket( DocumentationType.SWAGGER_2 ).apiInfo( apiInfo() )
-                .select().apis( RequestHandlerSelectors.withClassAnnotation( Controller.class ) )
+                .select().apis( RequestHandlerSelectors.basePackage( "com.wp.web" ))
                 .paths( PathSelectors.any() ).build();
     }
 }
