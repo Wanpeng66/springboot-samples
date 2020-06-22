@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-hadoop-sample
+
+
+hadoop:
+  hdfs:
+    path: hdfs://192.168.160.12:9000
+    username: wp
